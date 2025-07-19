@@ -1,6 +1,18 @@
-peso_payaso = 112
-peso_muñeca = 75
-numero_payaso = int(input("Ingrese la cantidad de payasos que se vende:"))
-numero_muñeca = int(input("Ingrese la cantidad de muñecas que se vende:"))
-peso_total = numero_muñeca*peso_muñeca+numero_payaso*peso_payaso
-print(f"El peso total del paquete es {peso_total} gramos\ncompuesto de {numero_muñeca} unidades de muñecas y \n{numero_payaso} unidades de payaso")
+def contar_lineas_codigo(ruta_archivo):
+    try:
+        if not ruta_archivo.endswith(".py"):
+            return
+        with open(ruta_archivo, "r", encoding="utf-8") as archivo:
+            lineas = archivo.readlines()
+        lineas_codigo = 0
+
+        for linea in lineas:
+            linea_limpia = linea.strip()
+            if linea_limpia != "" and not linea_limpia.startswith("#"):
+                lineas_codigo += 1
+        print(f"Número de líneas de código efectivas: {lineas_codigo}")
+    except FileNotFoundError:
+        print("La ruta del archivo no es válida o el archivo no existe.")
+
+ruta = input("Ingrese la ruta del archivo .py: ")
+contar_lineas_codigo(ruta)
